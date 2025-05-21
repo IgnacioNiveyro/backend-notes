@@ -4,9 +4,12 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   
-  // Configuración para aceptar CORS desde cualquier origen
+  // Obtener la URL del frontend desde las variables de entorno
+  const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+  
+  // Configuración para aceptar CORS solo desde la URL específica
   app.enableCors({
-    origin: '*',
+    origin: frontendUrl,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
   });
@@ -14,6 +17,6 @@ async function bootstrap() {
   const port = process.env.PORT ?? 3000;
   await app.listen(port);
   console.log(`App corriendo en http://localhost:${port}`);
-  console.log(`Aceptando CORS desde: todos los orígenes`);
+  console.log(`Aceptando CORS desde: ${frontendUrl}`);
 }
 bootstrap();
