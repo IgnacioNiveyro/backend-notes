@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { NoteRepository } from './note.repository';
-import { timeout } from 'rxjs';
 
 @Injectable()
 export class NoteService {
@@ -11,7 +10,6 @@ export class NoteService {
   }
 
   async findAll() {
-    await new Promise(resolve => setTimeout(resolve, 3000));
     return this.noteRepo.findAll();
   }
 

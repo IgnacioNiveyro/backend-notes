@@ -66,7 +66,6 @@ export class NoteRepository {
   }
 
   async archiveNote(id: number, active: boolean): Promise<any> {
-    // Método simplificado que solo actualiza el estado 'active' sin tocar los tags
     return this.prisma.note.update({
       where: { id },
       data: { active },

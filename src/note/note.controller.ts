@@ -3,7 +3,7 @@ import { NoteService } from './note.service';
 
 @Controller('notes')
 export class NoteController {
-  constructor(private readonly noteService: NoteService) {}
+  constructor(private readonly noteService: NoteService) { }
 
   @Post()
   create(@Body() body: { title: string; tags: string[] }) {
@@ -27,19 +27,19 @@ export class NoteController {
     return this.noteService.updateNote(Number(id), body.title, body.tags);
   }
   @Delete(':id')
-    remove(@Param('id') id: string) {
+  remove(@Param('id') id: string) {
     return this.noteService.deleteNote(Number(id));
   }
   @Put(':id/archive')
-archive(@Param('id') id: string, @Body() body: { active: boolean }) {
-  return this.noteService.archiveNote(Number(id), body.active);
-}
-@Get('active')
-getActiveNotes() {
-  return this.noteService.findByStatus(true);
-}
-@Get('archived')
-getArchivedNotes() {
-  return this.noteService.findByStatus(false);
-}
+  archive(@Param('id') id: string, @Body() body: { active: boolean }) {
+    return this.noteService.archiveNote(Number(id), body.active);
+  }
+  @Get('active')
+  getActiveNotes() {
+    return this.noteService.findByStatus(true);
+  }
+  @Get('archived')
+  getArchivedNotes() {
+    return this.noteService.findByStatus(false);
+  }
 }
